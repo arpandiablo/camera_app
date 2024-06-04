@@ -1,7 +1,13 @@
 import 'package:camera_app/Pages/servicepage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../camera_page.dart';
+
 
 void main() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.bottom
+  ]);
   runApp(const MyApp());
 }
 
@@ -10,6 +16,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom
+    ]);
     return const MaterialApp(
       home: WeatherPage(),
     );
@@ -194,32 +203,29 @@ class WeatherPage extends StatelessWidget {
         backgroundColor: const Color(0xFF819347),
         onTap: (int index) {
           if (index == 0) {
-            // Check if 'Home' icon is tapped (index 0)
             Navigator.push(
-              // Navigate to the desired page
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const WeatherPage()), // Replace HomePage with your desired page
+              MaterialPageRoute(builder: (context) => const WeatherPage()),
             );
           } else if (index == 1) {
-            // Check if 'Home' icon is tapped (index 0)
             Navigator.push(
-              // Navigate to the desired page
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const ServicesPage()), // Replace HomePage with your desired page
+              MaterialPageRoute(builder: (context) => const ServicesPage()),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CameraPage()),
             );
           }
         },
-        items:  <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           const BottomNavigationBarItem(
             icon: Icon(Icons.home, color: Colors.white),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('images/plant.png',height: 23),
+            icon: Image.asset('images/plant.png', height: 23),
             label: 'Services',
           ),
           const BottomNavigationBarItem(
@@ -336,9 +342,11 @@ class HarvestInfoCard extends StatelessWidget {
               child: Container(
                 width: 10,
                 decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: const BorderRadius.only(topRight: Radius.circular(5) ,bottomRight: Radius.circular(5)),
-                  ),
+                  color: color,
+                  borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(5),
+                      bottomRight: Radius.circular(5)),
+                ),
               ),
             ),
           ],

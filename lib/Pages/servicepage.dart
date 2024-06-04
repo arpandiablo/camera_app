@@ -1,7 +1,12 @@
 import 'package:camera_app/Pages/weatherpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import '../camera_page.dart';
 
 void main() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.bottom
+  ]);
   runApp(const MyApp());
 }
 
@@ -10,6 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom
+    ]);
     return const MaterialApp(
       home: ServicesPage(),
     );
@@ -234,6 +242,12 @@ class ServicesPage extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) =>
                       const ServicesPage()), // Replace HomePage with your desired page
+            );
+          }
+          else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CameraPage()),
             );
           }
         },
